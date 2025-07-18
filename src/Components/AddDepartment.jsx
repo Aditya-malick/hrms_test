@@ -31,12 +31,12 @@ const AddDepartmentForm = () => {
     } catch (err) {
       console.error("❌ Error adding department:", err);
       alert("Something went wrong while adding department.");
-    }
+    }``
   };
 
   return (
-    <div className="max-w-lg mx-auto mt-10 bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-6 text-center text-blue-700">Add Department</h2>
+    <div className="max-w-lg p-6 mx-auto mt-10 bg-white rounded-lg shadow-md">
+      <h2 className="mb-6 text-2xl font-bold text-center text-blue-700">Add Department</h2>
 
       <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4">
         <input
@@ -76,7 +76,7 @@ const AddDepartmentForm = () => {
 
         <button
           type="submit"
-          className="bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+          className="py-2 text-white bg-blue-600 rounded hover:bg-blue-700"
         >
           Add Department
         </button>

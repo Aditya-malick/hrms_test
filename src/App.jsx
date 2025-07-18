@@ -10,17 +10,20 @@ import UserForm from './Components/UserForm'
 import { Routes, Route } from 'react-router-dom'
 import AddDepartmentForm from './Components/AddDepartment'
 import Login from './pages/Login'
+import Employeelist from './Components/employeelist'
 function App() {
 
   return (
     <>
       <Routes>
-        <Route path='/' element={<Login/>} />
+        <Route path='/' element={<Login />} />
         <Route path='/AddDepartmentForm' element={<AddDepartmentForm />} />
         <Route path='/UserForm' element={<UserForm />} />
         <Route path='/HrDashboard' element={<HrDashboard />} />
         <Route path='/EmployeeDashboard' element={<EmployeeDashboart />} />
         <Route path='/ManegerDashboard' element={<ManegerDashboard />} />
+        <Route path='/employeelist/:departmentName' element={<Employeelist />} />
+
       </Routes>
     </>
   )

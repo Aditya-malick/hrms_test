@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios'
 
 const CreateUserForm = () => {
   const navigate = useNavigate();
@@ -32,24 +33,15 @@ const CreateUserForm = () => {
   const token = localStorage.getItem("token");
 
   try {
-    const res = await fetch("http://localhost:8080/api/users/create", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "auth-token": token,
-      },
-      body: JSON.stringify(formData),
-    });
-
+    const res = await axios.post("http://localhost:8080/api/users/create", formData)
     const result = await res.json();
+
 
     if (res.ok) {
       alert("User created successfully!");
 
       // 🔁 Redirect based on role
-      if (result.role === "HR") navigate("/HrDashboard");
-      else if (result.role === "Manager") navigate("/ManagerDashboard");
-      else navigate("/EmployeeDashboard");
+       navigate("/EmployeeDashboard");
     } else {
       alert(result.message || "Error creating user");
     }
@@ -60,10 +52,10 @@ const CreateUserForm = () => {
 };
 
   return (
-    <div className="max-w-2xl mx-auto mt-10 bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-6 text-center text-purple-700">Create New User</h2>
+    <div className="max-w-2xl p-6 mx-auto mt-10 bg-white rounded-lg shadow-md">
+      <h2 className="mb-6 text-2xl font-bold text-center text-purple-700">Create New User</h2>
 
-      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <input type="text" name="employeeId" placeholder="Employee ID" className="input-style" value={formData.employeeId} onChange={handleChange} />
         <input type="text" name="firstName" placeholder="First Name" className="input-style" value={formData.firstName} onChange={handleChange} />
         <input type="text" name="lastName" placeholder="Last Name" className="input-style" value={formData.lastName} onChange={handleChange} />
@@ -104,7 +96,7 @@ const CreateUserForm = () => {
           <option value="Terminated">Terminated</option>
         </select>
 
-        <button type="submit" className="col-span-1 md:col-span-2 bg-purple-700 text-white px-6 py-2 rounded hover:bg-purple-800">
+        <button type="submit" className="col-span-1 px-6 py-2 text-white bg-purple-700 rounded md:col-span-2 hover:bg-purple-800">
           Create User
         </button>
       </form>

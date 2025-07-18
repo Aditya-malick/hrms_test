@@ -19,7 +19,7 @@ const Login = () => {
 
     try {
       const res = await axios.post('http://localhost:8080/api/auth/login', formData);
-      console.log(res.data)
+      console.log(" data came from backend",res.data)
       alert('Login successful!');
       localStorage.setItem('token', res.data.token);
       if(res.data.role === "HR")navigate('/HrDashboard')
@@ -33,14 +33,14 @@ const Login = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-indigo-500 to-purple-700">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h2 className="text-2xl font-bold text-center text-indigo-700 mb-6">HRMS Login</h2>
+      <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg">
+        <h2 className="mb-6 text-2xl font-bold text-center text-indigo-700">HRMS Login</h2>
         <form onSubmit={handleLogin} className="space-y-4">
           <input
             type="text"
             name="employeeId"
             placeholder="Employee ID"
-            className="w-full border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
             value={formData.employeeId}
             onChange={handleChange}
             required
@@ -49,14 +49,14 @@ const Login = () => {
             type="password"
             name="password"
             placeholder="Password"
-            className="w-full border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
             value={formData.password}
             onChange={handleChange}
             required
           />
           <button
             type="submit"
-            className="w-full bg-indigo-700 text-white font-semibold py-2 rounded hover:bg-indigo-800"
+            className="w-full py-2 font-semibold text-white bg-indigo-700 rounded hover:bg-indigo-800"
           >
             Login
           </button>
