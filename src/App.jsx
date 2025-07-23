@@ -1,6 +1,5 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css'
 import "./index.css"
 import HrDashboard from './pages/HrDashboard'
@@ -11,19 +10,26 @@ import { Routes, Route } from 'react-router-dom'
 import AddDepartmentForm from './Components/AddDepartment'
 import Login from './pages/Login'
 import Employeelist from './Components/employeelist'
+import CreateAnnouncement from './Components/CreateAnnouncements'
+import ViewAnnouncements from './Components/ViewAnnouncements'
+import EmployeeAttendance from './pages/Attendence'
+
 function App() {
 
   return (
     <>
+     <ToastContainer position="top-right" autoClose={3000} />
       <Routes>
         <Route path='/' element={<Login />} />
+        <Route path='/CreateAnnouncement' element={<CreateAnnouncement />} />
+        <Route path='/ViewAnnouncements/:role' element={<ViewAnnouncements />} />
         <Route path='/AddDepartmentForm' element={<AddDepartmentForm />} />
         <Route path='/UserForm' element={<UserForm />} />
         <Route path='/HrDashboard' element={<HrDashboard />} />
         <Route path='/EmployeeDashboard' element={<EmployeeDashboart />} />
         <Route path='/ManegerDashboard' element={<ManegerDashboard />} />
         <Route path='/employeelist/:departmentName' element={<Employeelist />} />
-
+        <Route path='/Attendance/:employeeId' element={<EmployeeAttendance />} />
       </Routes>
     </>
   )

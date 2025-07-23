@@ -34,13 +34,12 @@ const CreateUserForm = () => {
 
   try {
     const res = await axios.post("http://localhost:8080/api/users/create", formData)
-    const result = await res.json();
+    
 
 
     if (res.ok) {
       alert("User created successfully!");
 
-      // 🔁 Redirect based on role
        navigate("/EmployeeDashboard");
     } else {
       alert(result.message || "Error creating user");
@@ -89,7 +88,7 @@ const CreateUserForm = () => {
         <input type="number" name="allowances" placeholder="Allowances" className="input-style" onChange={handleChange} />
         <input type="number" name="deductions" placeholder="Deductions" className="input-style" onChange={handleChange} />
 
-        {/* Status (Optional dropdown) */}
+        {/* Status */}
         <select name="status" className="input-style" onChange={handleChange}>
           <option value="Active">Active</option>
           <option value="Resigned">Resigned</option>

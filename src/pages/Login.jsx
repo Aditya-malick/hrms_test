@@ -19,9 +19,9 @@ const Login = () => {
 
     try {
       const res = await axios.post('http://localhost:8080/api/auth/login', formData);
-      console.log(" data came from backend",res.data)
+      console.log(" data came from backend",res.data.employeeId)
       alert('Login successful!');
-      localStorage.setItem('token', res.data.token);
+      localStorage.setItem('employeeId', res.data.employeeId);
       if(res.data.role === "HR")navigate('/HrDashboard')
       else if(res.data.role === "Manager")navigate('/ManagerDashboard')
       else navigate('/EmployeeDashboard')

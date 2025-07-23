@@ -21,7 +21,7 @@ const AddDepartmentForm = () => {
 
     try {
       const res = await axios.post("http://localhost:8080/api/departments/create", formData);
-      alert("✅ Department added successfully");
+      alert("Department added successfully");
       setFormData({
         dName: "",
         dId: "",
@@ -29,7 +29,7 @@ const AddDepartmentForm = () => {
         description: ""
       });
     } catch (err) {
-      console.error("❌ Error adding department:", err);
+      console.error("Error adding department:", err);
       alert("Something went wrong while adding department.");
     }``
   };
