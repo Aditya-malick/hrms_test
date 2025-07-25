@@ -13,8 +13,6 @@ import { BsCashCoin } from "react-icons/bs";
 
 
 
-
-
 const HrDashboard = () => {
   const Navigate = useNavigate()
   const [details, setDetails] = useState([]);
@@ -134,6 +132,7 @@ const HrDashboard = () => {
                   <hr></hr>
                   <p className="text-sm text-gray-500">Manager: {data.maneger}</p>
                 </div>
+                
                 <button
                   onClick={() =>
                     handleClick(data)

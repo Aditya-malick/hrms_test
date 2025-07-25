@@ -2,7 +2,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css'
 import "./index.css"
-import HrDashboard from './pages/HrDashboard'
+import HrDashboard from './pages/Hrdashboard'
 import ManegerDashboard from './pages/ManegerDashboard'
 import EmployeeDashboart from './pages/exmployee'
 import UserForm from './Components/UserForm'

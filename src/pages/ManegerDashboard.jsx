@@ -1,6 +1,13 @@
 import React from 'react';
 import { FaUsers, FaCheckCircle, FaChartLine } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { LuLayoutDashboard } from "react-icons/lu";
+import { GrAnnounce } from "react-icons/gr";
+import { MdAddCard } from "react-icons/md";
+import { IoMdPersonAdd } from "react-icons/io";
+import { MdAddBusiness } from "react-icons/md";
+import { BsCashCoin } from "react-icons/bs";
 
 const ManagerDashboard = () => {
   const Navigate = useNavigate()
@@ -11,73 +18,116 @@ const ManagerDashboard = () => {
     
   }
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div className="relative min-h-screen overflow-hidden">
+    <div className="relative absolute inset-0 z-0 bg-gradient-to-r from-purple-300 via-bg-[#f107a3] to-bg-[#00d2ff]  opacity-70 blur-2xl"></div>
+    <div className="z-10 flex min-h-screen ">
       {/* Sidebar */}
-      <aside className="w-64 p-6 space-y-4 text-white bg-indigo-800">
-        <h2 className="mb-6 text-2xl font-bold">Manager Panel</h2>
-        <nav className="space-y-2">
-          <a href="#" className="block px-3 py-2 rounded hover:bg-indigo-700">Dashboard</a>
-          <a href="#" className="block px-3 py-2 rounded hover:bg-indigo-700">My Team</a>
-          <a href="#" className="block px-3 py-2 rounded hover:bg-indigo-700">Leave Requests</a>
-          <a href="#" className="block px-3 py-2 rounded hover:bg-indigo-700">Performance</a>
-          <a href="#" className="block px-3 py-2 rounded hover:bg-indigo-700">Reports</a>
-          <button onClick={handlePerform} className="block px-3 py-2 rounded hover:bg-indigo-700">Announcements</button>
+      <aside className=" shadow-2xl border-2 border-gray-400 w-64 p-6 m-3 space-y-4 bg-[#F9F9F9] bg-opacity-30 backdrop-blur-md rounded-3xl ">
+        <h2 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-black via-pink-500 to-purple-600 animate-gradient">HRMS Maneger</h2>
+        <nav className="space-y-4 font-medium ">
+          <Link
+            to=""
+            className="flex items-center gap-2 px-3 py-2 border border-gray-400 rounded hover:bg-purple-400"
+          >
+            <LuLayoutDashboard className="text-purple-700" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-[length:200%_200%] animate-gradient">
+              Dashboard
+            </span>
+          </Link>
+          <Link
+            to=""
+            className="flex items-center gap-2 px-3 py-2 border border-gray-400 rounded hover:bg-purple-400"
+          >
+            <LuLayoutDashboard className="text-purple-700" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-[length:200%_200%] animate-gradient">
+              Dashboard
+            </span>
+          </Link>
+          <Link
+            to=""
+            className="flex items-center gap-2 px-3 py-2 border border-gray-400 rounded hover:bg-purple-400"
+          >
+            <BsCashCoin className="text-purple-700" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-[length:200%_200%] animate-gradient">
+              Payroll
+            </span>
+          </Link>
+          <Link
+            to="/AddDepartmentForm"
+            className="flex items-center gap-2 px-3 py-2 border border-gray-400 rounded hover:bg-purple-400"
+          >
+            <MdAddBusiness className="text-purple-700" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-[length:200%_200%] animate-gradient">
+              Add Department
+            </span>
+          </Link>
+          <Link
+            to="/UserForm"
+            className="flex items-center gap-2 px-3 py-2 border border-gray-400 rounded hover:bg-purple-400"
+          >
+            <IoMdPersonAdd className="text-purple-700" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-[length:200%_200%] animate-gradient">
+              Create Employee
+            </span>
+          </Link>
+          <button onClick={handlePerform} className="flex items-center w-full gap-2 px-3 py-2 border border-gray-400 rounded hover:bg-purple-400"> <MdAddCard className="text-purple-700" /><span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-[length:200%_200%] animate-gradient">Announcements</span></button>
+          <button onClick={() => { Navigate('/CreateAnnouncement') }} className="flex items-center gap-2 px-3 py-2 border border-gray-400 rounded hover:bg-purple-400"> <GrAnnounce className="text-purple-700" /><span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-[length:200%_200%] animate-gradient">Add Announcement</span></button>
         </nav>
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 p-8">
-        {/* Navbar */}
-        <header className="flex items-center justify-between mb-8">
-          <h1 className="text-3xl font-semibold text-indigo-800">Welcome, Manager</h1>
-          <div className="text-sm text-gray-600">Today: {new Date().toLocaleDateString()}</div>
-        </header>
+      <main className="flex-1 w-64 p-4 ">
+        <div className="flex shadow-2xl rounded-3xl items-center border-2 border-gray-400  justify-between mb-6 bg-[#F9F9F9] bg-opacity-30 p-6 ">
+          <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 animate-gradient">Welcome, Maneger</h1>
+          <button className="px-4 py-2 text-white bg-purple-600 rounded hover:bg-purple-700">Logout</button>
+        </div>
 
-        {/* Cards */}
-        <section className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          {/* Team Overview */}
-          <div className="flex items-center p-6 space-x-4 bg-white rounded-lg shadow-md">
-            <FaUsers className="text-3xl text-indigo-600" />
-            <div>
-              <h3 className="text-lg font-semibold">Team Overview</h3>
-              <p className="text-sm text-gray-600">Manage team members</p>
-            </div>
+        {/* Analytics */}
+        <div className="grid grid-cols-2 gap-6 mb-8 md:grid-cols-3">
+          <div className="p-4  bg-white  border-purple-500 rounded shadow border-2 border-gray-400  space-y-4 bg-[#F9F9F9] bg-opacity-30 backdrop-blur-md rounded-3xl">
+            <h3 className="text-sm text-gray-500">Total Employees</h3>
+            <p className="text-2xl font-bold text-gray-800">64</p>
           </div>
+          <div className="p-4 bg-white  border-purple-500 rounded shadow border-2 border-gray-400  space-y-4 bg-[#F9F9F9] bg-opacity-30 backdrop-blur-md rounded-3xl">
+            <h3 className="text-sm text-gray-500">Managers</h3>
+            <p className="text-2xl font-bold text-gray-800">10</p>
+          </div>
+          <div className="p-4 bg-white  border-purple-500 rounded shadow border-2 border-gray-400  space-y-4 bg-[#F9F9F9] bg-opacity-30 backdrop-blur-md rounded-3xl">
+            <h3 className="text-sm text-gray-500">Departments</h3>
+            {/* <p className="text-2xl font-bold text-gray-800">{details.length}</p> */}
+          </div>
+        </div>
 
-          {/* Leave Approvals */}
-          <div className="flex items-center p-6 space-x-4 bg-white rounded-lg shadow-md">
-            <FaCheckCircle className="text-3xl text-green-600" />
-            <div>
-              <h3 className="text-lg font-semibold">Leave Requests</h3>
-              <p className="text-sm text-gray-600">Approve or reject leaves</p>
-            </div>
-          </div>
+        {/* Department List */}
+        <h1 className='text-2xl font-bold text-center text-purple-700'>Departments</h1>
+        {/* <section className='grid grid-cols-1 gap-6 mt-5 md:grid-cols-3'>
+          {details.map((data) => (
+            <div key={data._id} className="flex items-start p-3 space-x-4 bg-white rounded-lg shadow-md">
+              <FaUsers className="mt-1 text-3xl text-indigo-600" />
+              <div className="flex-grow ">
+                <h2 className="text-lg font-semibold">{data.dName}</h2>
 
-          {/* Performance Reviews */}
-          <div className="flex items-center p-6 space-x-4 bg-white rounded-lg shadow-md">
-            <FaChartLine className="text-3xl text-orange-600" />
-            <div>
-              <h3 className="text-lg font-semibold">Performance</h3>
-              <p className="text-sm text-gray-600">Review team performance</p>
+                <p className="text-sm text-gray-500">Dept ID: {data.dId}</p>
+                <hr></hr>
+                <p className="text-sm text-gray-500">Manager: {data.maneger}</p>
+              </div>
+              
+              <button
+                onClick={() =>
+                  handleClick(data)
+                }
+                className="px-3 py-1 ml-auto text-white bg-purple-600 rounded hover:bg-purple-700"
+              >
+                Details
+              </button>
             </div>
-          </div>
-        </section>
-        <br></br>
-        <hr/>
-        <br></br>
-        <h1 className='text-2xl text-center'><b>Departments</b></h1>
-        <section className='grid grid-cols-1 gap-6 mt-5 md:grid-cols-3'>
-          <div className="flex items-center p-6 space-x-4 bg-white rounded-lg shadow-md">
-            <FaUsers className="text-3xl text-indigo-600" />
-            <div>
-              <h3 className="text-lg font-semibold">Team Overview</h3>
-              <p className="text-sm text-gray-600">Manage team members</p>
-            </div>
-          </div>
-        </section>
+          ))}
+        </section> */}
       </main>
+
     </div>
-  );
+  </div>
+);
 };
 
 export default ManagerDashboard;
