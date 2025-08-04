@@ -9,10 +9,6 @@ import { IoMdPersonAdd } from "react-icons/io";
 import { MdAddBusiness } from "react-icons/md";
 import { BsCashCoin } from "react-icons/bs";
 
-
-
-
-
 const HrDashboard = () => {
   const Navigate = useNavigate()
   const [details, setDetails] = useState([]);
@@ -28,6 +24,8 @@ const HrDashboard = () => {
 
   }
 
+  
+const userData = JSON.parse(localStorage.getItem("userInfo"))
 
   useEffect(() => {
     axios.get("http://localhost:8080/api/departments/all")
@@ -40,6 +38,7 @@ const HrDashboard = () => {
 
   return (
     <div className="relative min-h-screen overflow-hidden">
+    
       <div className="relative absolute inset-0 z-0 bg-gradient-to-r from-purple-300 via-bg-[#f107a3] to-bg-[#00d2ff]  opacity-70 blur-2xl"></div>
       <div className="z-10 flex min-h-screen ">
         {/* Sidebar */}
@@ -56,12 +55,12 @@ const HrDashboard = () => {
               </span>
             </Link>
             <Link
-              to=""
+              to="/profile"
               className="flex items-center gap-2 px-3 py-2 border border-gray-400 rounded hover:bg-purple-400"
             >
               <LuLayoutDashboard className="text-purple-700" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-[length:200%_200%] animate-gradient">
-                Dashboard
+                Profile
               </span>
             </Link>
             <Link
@@ -99,7 +98,7 @@ const HrDashboard = () => {
         {/* Main Content */}
         <main className="flex-1 w-64 p-4 ">
           <div className="flex shadow-2xl rounded-3xl items-center border-2 border-gray-400  justify-between mb-6 bg-[#F9F9F9] bg-opacity-30 p-6 ">
-            <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 animate-gradient">Welcome, HR</h1>
+            <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 animate-gradient">Welcome, {userData.firstname}</h1>
             <button className="px-4 py-2 text-white bg-purple-600 rounded hover:bg-purple-700">Logout</button>
           </div>
 

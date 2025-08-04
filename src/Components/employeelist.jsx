@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { FaUserTie } from "react-icons/fa";
-import { useParams } from "react-router-dom"; 
+import { Navigate, useNavigate, useParams } from "react-router-dom"; 
 
 const EmployeeList = () => {
+  const Navigate = useNavigate()
   const { departmentName } = useParams(); 
   const [employees, setEmployees] = useState([]);
-
+  
+  
   useEffect(() => {
     axios
       .get(`http://localhost:8080/api/employee/${departmentName}`) 
@@ -36,7 +38,7 @@ const EmployeeList = () => {
             {employees.map((emp) => (
               <div
                 key={emp._id}
-                className="flex h-10 gap-4 p-10 m-5 border-t-4 border-indigo-500 rounded-lg shadow-md"
+                className="flex items-center justify-between gap-4 p-5 m-5 border-t-4 border-indigo-500 rounded-lg shadow-md"
               >
                 <FaUserTie className="text-3xl text-indigo-600 " />
                 <div className="flex items-center justify-center h-4 gap-10">
@@ -48,6 +50,9 @@ const EmployeeList = () => {
 
                   <p className="text-sm text-gray-600">Status: {emp.status}</p>
                 </div>
+                <button
+                  onClick={() => Navigate(`/EmployeeDetails/${emp.employeeId}`)}
+                className="p-4 text-white bg-purple-500 rounded-md shadow-xl">Details</button>
               </div>
             ))}
           </div>

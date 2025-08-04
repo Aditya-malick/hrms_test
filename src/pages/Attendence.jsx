@@ -4,13 +4,15 @@ import axios from 'axios';
 const EmployeeAttendance = () => {
   const [mode, setMode] = useState('Office');
   const [attendanceList, setAttendanceList] = useState([]);
-
-  const employeeId = localStorage.getItem('employeeId');
-
+  const user = JSON.parse(localStorage.getItem('userInfo'));
+      const employeeId = user.employeeId;
   // Fetch attendance history on page load
   const fetchAttendance = async () => {
     try {
+      
+      console.log(employeeId)
       const res = await axios.get(`http://localhost:8080/api/attendance/employee/${employeeId}`);
+      console.log(res.data)
       setAttendanceList(res.data);
     } catch (err) {
       console.error("Failed to fetch attendance", err);
@@ -38,6 +40,7 @@ const EmployeeAttendance = () => {
   // Handle Check-Out
   const handleCheckOut = async () => {
     try {
+      
       const res = await axios.post('http://localhost:8080/api/attendance/mark', {
         employeeId,
       });
@@ -87,32 +90,33 @@ const EmployeeAttendance = () => {
         {attendanceList.length === 0 ? (
           <p>No attendance records found.</p>
         ) : (
-          <table className="w-full text-left">
-            <thead>
-              <tr className="text-gray-700">
-                <th className="py-2">Date</th>
-                <th className="py-2">Check-in</th>
-                <th className="py-2">Check-out</th>
-                <th className="py-2">Mode</th>
-              </tr>
-            </thead>
-            <tbody>
-              {attendanceList.map((entry) => (
-                <tr key={entry._id} className="text-gray-600 border-t">
-                  <td className="py-2">
-                    {new Date(entry.date).toLocaleDateString()}
-                  </td>
-                  <td className="py-2">
-                    {entry.checkIn ? new Date(`1970-01-01T${entry.checkIn}`).toLocaleTimeString() : '—'}
-                  </td>
-                  <td className="py-2">
-                    {entry.checkOut ? new Date(`1970-01-01T${entry.checkOut}`).toLocaleTimeString() : '—'}
-                  </td>
-                  <td className="py-2">{entry.mode || '—'}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <table className="w-full overflow-hidden text-left border border-gray-300 rounded">
+  <thead className="bg-purple-100">
+    <tr>
+      <th className="px-4 py-2 border">Date</th>
+      <th className="px-4 py-2 border">Check-In</th>
+      <th className="px-4 py-2 border">Check-Out</th>
+      <th className="px-4 py-2 border">Mode</th>
+    </tr>
+  </thead>
+  <tbody>
+    {attendanceList.map((entry) => (
+      <tr key={entry._id} className="transition hover:bg-gray-100">
+        <td className="px-4 py-2 border">
+          {new Date(entry.date).toLocaleDateString()}
+        </td>
+        <td className="px-4 py-2 border">
+          {entry.checkIn ? new Date(entry.checkIn).toLocaleTimeString() : '—'}
+        </td>
+        <td className="px-4 py-2 border">
+          {entry.checkOut ? new Date(entry.checkOut).toLocaleTimeString() : '—'}
+        </td>
+        <td className="px-4 py-2 border">{entry.mode || '—'}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
         )}
       </div>
     </div>

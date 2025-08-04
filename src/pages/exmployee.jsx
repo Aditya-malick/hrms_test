@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaUser, FaMoneyCheckAlt, FaCalendarCheck } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 // import axios from 'axios';
 // import { FaUsers } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
@@ -10,12 +10,13 @@ import { MdAddCard } from "react-icons/md";
 import { IoMdPersonAdd } from "react-icons/io";
 import { MdAddBusiness } from "react-icons/md";
 import { BsCashCoin } from "react-icons/bs";
+import { useUser } from '../UserContext';
+
+const userData = JSON.parse(localStorage.getItem("userInfo"))
 
 
 const EmployeeDashboard = () => {
   const Navigate = useNavigate();
-
-  const user = localStorage.getItem('employeeId')
 
   const handleAnnouncement = () => {
     const role = "Employee";
@@ -25,6 +26,7 @@ const EmployeeDashboard = () => {
   const handleAttendance = () => {
     Navigate(`/Attendance/${user}`);
   };
+ 
 
   return (
     <div className="relative min-h-screen overflow-hidden">
@@ -32,7 +34,7 @@ const EmployeeDashboard = () => {
       <div className="relative absolute inset-0 z-0 bg-gradient-to-r from-purple-300 via-bg-[#f107a3] to-bg-[#00d2ff]  opacity-70 blur-2xl"></div>
 
       {/* Actual Dashboard Content (above the background) */}
-      <div className=" z-10 flex min-h-screen">
+      <div className="z-10 flex min-h-screen ">
         {/* Sidebar */}
         <aside className=" shadow-2xl border-2 border-gray-400 w-64 p-6 m-3 space-y-4 bg-[#F9F9F9] bg-opacity-30 backdrop-blur-md rounded-3xl ">
           <h2 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-black via-pink-500 to-purple-600 animate-gradient">HRMS Employee</h2>
@@ -90,7 +92,7 @@ const EmployeeDashboard = () => {
         {/* Main Content */}
         <main className="flex-1 w-64 p-4">
           <div className="flex shadow-2xl rounded-3xl items-center border-2 border-gray-400  justify-between mb-6 bg-[#F9F9F9] bg-opacity-30 p-6 ">
-            <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 animate-gradient">Welcome, Employee</h1>
+            <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 animate-gradient">Wecome, {userData.firstname} </h1>
             <button className="px-4 py-2 text-white bg-purple-600 rounded hover:bg-purple-700">Logout</button>
           </div>
 
@@ -99,7 +101,7 @@ const EmployeeDashboard = () => {
             <div className="flex items-center p-6 space-x-4 bg-white rounded-lg shadow-md">
               <FaUser className="text-3xl text-purple-600" />
               <div>
-                <h3 className="text-lg font-semibold">My Profile</h3>
+                <h3 onClick={() => Navigate('/Profile')} className="text-lg font-semibold">My Profile</h3>
                 <p className="text-sm text-gray-600">View & update personal info</p>
               </div>
             </div>
@@ -114,7 +116,7 @@ const EmployeeDashboard = () => {
 
             <div className="flex items-center p-6 space-x-4 bg-white rounded-lg shadow-md">
               <FaCalendarCheck className="text-3xl text-blue-600" />
-              <div>
+              <div onClick={() => Navigate('/ApplyLeave')}>
                 <h3 className="text-lg font-semibold">Leave Status</h3>
                 <p className="text-sm text-gray-600">Check applied leaves</p>
               </div>

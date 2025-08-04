@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '../UserContext'
 
 const Login = () => {
+  const { setUser } = useUser()
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -19,13 +21,19 @@ const Login = () => {
 
     try {
       const res = await axios.post('http://localhost:8080/api/auth/login', formData);
-      console.log(" data came from backend",res.data.employeeId)
+      const userData = res.data
+      const info = {
+        firstname: userData.firstName,
+        employeeId: userData.employeeId,
+        role: userData.role,
+        department: userData.jobDetails.department
+      }
+      localStorage.setItem("userInfo", JSON.stringify(info))
       alert('Login successful!');
-      localStorage.setItem('employeeId', res.data.employeeId);
       if(res.data.role === "HR")navigate('/HrDashboard')
-      else if(res.data.role === "Manager")navigate('/ManagerDashboard')
+      else if(res.data.role === "Manager")navigate('/ManegerDashboard')
       else navigate('/EmployeeDashboard')
-        
+
     } catch (err) {
       alert(err.response?.data?.message || 'Login failed');
     }
